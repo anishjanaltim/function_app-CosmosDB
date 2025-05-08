@@ -6,9 +6,11 @@ module.exports = async function (context, req) {
         const bodyBuffer = Buffer.from(req.body);
   
         const boundary = multipart.getBoundary(req.headers["content-type"]);
-        const parts = multipart.parse(bodyBuffer, boundary);
-
-        console.log(parts)
-        context.done();
+        const blobs = multipart.parse(bodyBuffer, boundary);
+        console.log(blobs[0].data)
+        
+        context.res = {
+          body: `file uploaded`
+        }
       }
 };
